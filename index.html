@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Vrinda Vijayan</title>
+  <meta name="description" content="Vrinda Vijayan • Flutter Developer • Firebase" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#0ea5b7; /* teal-ish */
+      --brand-dark:#0b5f66;
+      --blue:#1e88e5;
+      --bg:#f8fafc;
+      --text:#0f172a;
+      --muted:#475569;
+      --card:#ffffff;
+      --shadow: 0 8px 24px rgba(2,8,23,.08);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Roboto",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,sans-serif;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Header */
+    .appbar{position:sticky;top:0;z-index:50;background:var(--blue);color:#fff;box-shadow:var(--shadow)}
+    .appbar .row{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .nav{display:flex;gap:8px}
+    .nav a{padding:10px 14px;border-radius:999px;color:#fff;font-weight:500}
+    .nav a:hover{background:rgba(255,255,255,.12)}
+
+    /* Sections */
+    section{padding:80px 24px}
+    .container{max-width:1200px;margin:0 auto}
+    .section-title{display:flex;align-items:center;gap:10px;color:var(--brand)}
+    .section-title h2{margin:0;font-size:28px;font-weight:800}
+    .star{width:22px;height:22px;fill:var(--brand)}
+
+    /* Hero */
+    .hero{position:relative;display:grid;place-items:center;padding:100px 24px;background:url('assets/images/hero_bg.jpg') center/cover no-repeat}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4)}
+    .hero-inner{position:relative;text-align:center;color:#fff;max-width:900px}
+    .avatar-wrap{display:inline-grid;place-items:center;border:4px solid #fff;border-radius:999px;box-shadow:0 12px 24px rgba(0,0,0,.25)}
+    .avatar{width:160px;height:160px;border-radius:50%;object-fit:cover}
+    .hero h1{margin:24px 0 8px;font-size:40px;font-weight:900;letter-spacing:.5px}
+    .hero p{margin:0;color:rgba(255,255,255,.8);font-size:18px}
+    .hero .cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:28px;font-weight:700;border:2px solid transparent;cursor:pointer;transition:.2s ease}
+    .btn.primary{background:#fff;color:var(--blue)}
+    .btn.primary:hover{transform:translateY(-1px)}
+    .btn.ghost{border-color:#fff;color:#fff;background:transparent}
+    .btn.ghost:hover{background:rgba(255,255,255,.1)}
+
+    /* About */
+    .about{background:url('assets/images/about_bg.jpeg') center/cover no-repeat;position:relative}
+    .about::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.25)}
+    .about .container{position:relative}
+    .about-card{display:grid;grid-template-columns:1fr;gap:28px;background:rgba(255,255,255,.92);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .about-card img{border-radius:16px;height:280px;object-fit:cover;width:100%}
+    .about-text p{line-height:1.7;margin:0 0 16px}
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{display:inline-block;padding:8px 12px;border-radius:999px;background:var(--brand);color:#b9f3ff;font-weight:600}
+
+    @media(min-width:900px){
+      .about-card{grid-template-columns:1fr 2fr;align-items:start}
+    }
+
+    /* Projects */
+    .projects{background:url('assets/images/p.jpg') center/cover no-repeat;position:relative}
+    .projects::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.3)}
+    .projects .container{position:relative}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:24px}
+    .card{background:#fff;border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .card .thumb{aspect-ratio:18/9;object-fit:cover;width:100%}
+    .card-body{padding:16px;display:flex;flex-direction:column;gap:12px}
+    .card h3{margin:0;font-size:20px}
+    .muted{color:#334155}
+    .card .btn{align-self:flex-start;background:#000;color:#fff;border-color:#000}
+
+    /* Contact */
+    .contact{background:url('assets/images/contact_bg.jpg') center/cover no-repeat;position:relative}
+    .contact::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.3)}
+    .contact .container{position:relative}
+    .contact-card{background:rgba(255,255,255,.92);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .contact p{margin:8px 0 24px;text-align:center}
+    .chip-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .contact-chip{display:inline-flex;align-items:center;gap:8px;background:#f1f5f9;border-radius:999px;padding:10px 14px}
+    .contact-chip svg{width:18px;height:18px;fill:var(--brand)}
+
+    /* Footer */
+    footer{background:#083344;color:#fff;padding:20px;text-align:center}
+  </style>
+</head>
+<body>
+  <!-- AppBar -->
+  <header class="appbar">
+    <div class="row">
+      <div class="brand">My Portfolio</div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-inner">
+      <span class="avatar-wrap"><img class="avatar" src="assets/images/profile.jpeg" alt="Vrinda Vijayan"/></span>
+      <h1>Vrinda Vijayan</h1>
+      <p>Flutter Developer • Firebase</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">View My Work</a>
+        <a class="btn ghost" href="#contact">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <h2>About Me</h2>
+      </div>
+
+      <div class="about-card">
+        <img src="assets/images/profile.jpeg" alt="Vrinda portrait" />
+        <div class="about-text">
+          <p>
+            I’m Vrinda, a Flutter developer focused on crafting clean, responsive and delightful apps. I enjoy turning ideas into products.
+          </p>
+          <h3 style="color:var(--brand);margin:0 0 10px;font-size:20px">Skills</h3>
+          <div class="skills">
+            <span class="chip">Flutter &amp; Dart</span>
+            <span class="chip">Firebase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-title">
+        <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <h2>Projects</h2>
+      </div>
+
+      <div class="grid" role="list">
+        <!-- Repeatable card pattern -->
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/travel.png" alt="TravelExplore" />
+          <div class="card-body">
+            <h3>TravelExplore</h3>
+            <p class="muted">Discover places with maps, filters and bookmarking.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/f30/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/recipe.png" alt="RecipeApp" />
+          <div class="card-body">
+            <h3>RecipeApp</h3>
+            <p class="muted">Save, search and cook with step-by-step recipes.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp31/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/photo.png" alt="PhotoAlbum" />
+          <div class="card-body">
+            <h3>PhotoAlbum</h3>
+            <p class="muted">Organize and share photos with albums and tags.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp32/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/c1.jpeg" alt="Contacts App" />
+          <div class="card-body">
+            <h3>Contacts App</h3>
+            <p class="muted">Allows users to manage contact information.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fpp29/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/student.jpg" alt="Student Registration" />
+          <div class="card-body">
+            <h3>Student Registration</h3>
+            <p class="muted">Allows students information.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp23/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/pngttask-manager.jpg" alt="Task Manager" />
+          <div class="card-body">
+            <h3>Task Manager</h3>
+            <p class="muted">Allows information.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp24/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/game.jpg" alt="Tap Counter Game" />
+          <div class="card-body">
+            <h3>Tap Counter Game</h3>
+            <p class="muted">Enjoy.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp25/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/products.jpg" alt="Products app" />
+          <div class="card-body">
+            <h3>Products app</h3>
+            <p class="muted">What a product is and why it’s worth buying.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp26/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/whatsapp.jpeg" alt="simple whatsapp" />
+          <div class="card-body">
+            <h3>simple whatsapp</h3>
+            <p class="muted">A place to express yourself.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/whatsapp/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/login.jpg" alt="login me" />
+          <div class="card-body">
+            <h3>login me</h3>
+            <p class="muted">The gateway to a mobile app.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp33" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/Quiz.png" alt="QuizApp" />
+          <div class="card-body">
+            <h3>QuizApp</h3>
+            <p class="muted">Answer fun questions on various topics to test knowledge.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp18" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/student.jpg" alt="StudentResultApp" />
+          <div class="card-body">
+            <h3>StudentResultApp</h3>
+            <p class="muted">Generates student reports.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp19/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/color.jpeg" alt="Color Palette Picker" />
+          <div class="card-body">
+            <h3>Color Palette Picker</h3>
+            <p class="muted">Extract vibrant colors from photos. Save and share palettes.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp20/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/feedback.jpeg" alt="feedbackformapp" />
+          <div class="card-body">
+            <h3>feedbackformapp</h3>
+            <p class="muted">Collect opinions, suggestions, and criticisms.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp21/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/planner.jpeg" alt="Daily Planner" />
+          <div class="card-body">
+            <h3>Daily Planner</h3>
+            <p class="muted">Daily planning for individuals and teams.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp22/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/theme.jpeg" alt="Theme + Onboarding Demo" />
+          <div class="card-body">
+            <h3>Theme + Onboarding Demo</h3>
+            <p class="muted">Introduce new users and help them experience value quickly.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp34/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/counter.png" alt="Persistent Counter" />
+          <div class="card-body">
+            <h3>Persistent Counter</h3>
+            <p class="muted">Retains value between page reloads for continuous tracking.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp35/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/diary.jpg" alt="Personal Diary" />
+          <div class="card-body">
+            <h3>Personal Diary</h3>
+            <p class="muted">Private journal for thoughts and reflections.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/fp36/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img class="thumb" src="assets/images/bd.jpg" alt="blooddonorsapp" />
+          <div class="card-body">
+            <h3>blooddonorsapp</h3>
+            <p class="muted">Filter donation requests by location and blood group.</p>
+            <a class="btn" href="https://vrindavijayan16.github.io/blooddonorsapp/" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="section-title" style="justify-content:center">
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <h2>Get in Touch</h2>
+        </div>
+        <p>Have a project in mind? Let’s build something great together.</p>
+        <div class="chip-row" role="list">
+          <span class="contact-chip" role="listitem" aria-label="email">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13 2 6.76V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6.76L12 13zm0-2L2 4h20L12 11z"/></svg>
+            <span>vrindaammu321gmail.com</span>
+          </span>
+          <span class="contact-chip" role="listitem" aria-label="phone">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h2.49a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.2 2.21z"/></svg>
+            <span>+91 8848056694</span>
+          </span>
+          <span class="contact-chip" role="listitem" aria-label="location">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/></svg>
+            <span>Kerala, India</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Vrinda Vijayan • Built with HTML/CSS/JS
+  </footer>
+
+  <script>
+    // Enhance external links (open in new tab already via target, add noopener in case links added later)
+    document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+      a.rel = 'noopener';
+    });
+  </script>
+</body>
+</html>
